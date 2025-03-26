@@ -7,7 +7,8 @@ const simpleFetch = async ({ url, data, headers = {}, method = 'GET' }) => {
 
         const fetchOptions = {
             method,
-            headers: defaultHeaders
+            headers: defaultHeaders ,
+            // credentials: 'include',
         };
 
         // Only add body for methods that can have a body
@@ -29,7 +30,7 @@ const simpleFetch = async ({ url, data, headers = {}, method = 'GET' }) => {
         }
 
     } catch (error) {
-        console.error('Fetch error:', error);
+        console.error('Fetch error oops:', error.message);
         throw error;
     }
 };
