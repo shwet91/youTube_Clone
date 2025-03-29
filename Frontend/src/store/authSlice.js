@@ -20,9 +20,20 @@ const authSlice = createSlice({
         logout : (state) => {
             state.status = false,
             state.userData = {}
+        },
+        changeCoverImage : (state , action) => {
+            state.userData.coverImage = action.payload.coverImage
+        },
+        changeAvatar : (state , action) => {
+            state.userData.avatar = action.payload.avatar
+        },
+        changeDetails : (state , action) => {
+            state.userData.fullName = action.payload.fullName,
+            state.userData.username = action.payload.username,
+            state.userData.email = action.payload.email
         }
     }
 })
 
-export const { login , logout } = authSlice.actions
+export const { login , logout , changeCoverImage , changeAvatar , changeDetails } = authSlice.actions
 export default authSlice.reducer;

@@ -20,6 +20,10 @@ export default {
     getComments : `${server}/comments/getComments`,  // send data in params and query
     addComments : `${server}/comments/addComment`,
     updateComment : `${server}/comments/updateComment`,
-    deleteComment: `${server}/comments/deleteComment`
+    deleteComment: `${server}/comments/deleteComment`,
+
+    // video apis
+
+    publishVideo : `${server}/videos/` // POST for public and GET for getAllVideos
 
 }

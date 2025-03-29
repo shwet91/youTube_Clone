@@ -6,7 +6,9 @@ const formFetch= async({url , data , method}) => {
 
         const fetchOptions = {
             method ,
-            body : data
+            body : data,
+            headers: {} ,
+            credentials: 'include', 
         }
         
         const response = await fetch(url , fetchOptions);

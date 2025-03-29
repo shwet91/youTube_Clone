@@ -18,11 +18,13 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 
 
 function LoginForm() {
 
+  const navigate = useNavigate()
 
     const formSchema = z.object({
       email: z.string().min(3).max(50),
@@ -67,7 +69,7 @@ function LoginForm() {
   
     
     <Form {...form}  >
-    <form onSubmit={form.handleSubmit(onSubmit)} className="p-7 sm:w-1/2  flex flex-wrap gap-8  border-2 w-4/5 ">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="p-11 sm:w-1/2  flex flex-wrap gap-8 justify-center border w-4/5 ">
 
 
 
@@ -77,13 +79,13 @@ function LoginForm() {
         name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>email</FormLabel>
+            <FormLabel className={"text-gray-500"}>email</FormLabel>
             <FormControl>
-              <Input className=""  placeholder="shadcn" {...field} />
+              <Input  placeholder="Enter your Email" className="text-gray-500" {...field} />
    
             </FormControl>
             <FormDescription>
-              This is your public display name.
+
             </FormDescription>
             <FormMessage />
           </FormItem>
@@ -97,13 +99,13 @@ function LoginForm() {
         name="password"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Password</FormLabel>
+            <FormLabel className={"text-gray-500"}>Password</FormLabel>
             <FormControl>
-              <Input type="password" placeholder="shadcn" {...field} />
+              <Input type="password" placeholder="Enter your password" className="text-gray-500" {...field} />
    
             </FormControl>
             <FormDescription>
-              This is your public display name.
+
             </FormDescription>
             <FormMessage />
           </FormItem>
@@ -112,8 +114,10 @@ function LoginForm() {
         )}
       />
 
-      <Button className="sm:top-8 relative" type="submit">Submit</Button>
+      <Button className="sm:top-8 relative   hover:bg-rose-950 bg-rose-900"  type="submit">Login</Button>
+    
     </form>
+    <Button onClick={() => navigate("/signup")} className="sm:top-8 relative  hover:bg-rose-950 bg-rose-900"  type="submit">Sign up</Button>
   </Form>
   )
 }

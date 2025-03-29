@@ -17,6 +17,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { changeDetails } from '@/store/authSlice'
+import { useDispatch } from 'react-redux'
  
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -28,7 +30,7 @@ const formSchema = z.object({
 
 function UpdateUserDetails() {
 
-
+  const dispatch = useDispatch()
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -39,10 +41,9 @@ function UpdateUserDetails() {
     },
   })
   
-    // 2. Define a submit handler.
+
    async function onSubmit(values) {
-      // Do something with the form values.
-      // ✅ This will be type-safe and validated.
+
       console.log(values)
 
       const response = await simpleFetch({
@@ -52,6 +53,12 @@ function UpdateUserDetails() {
       })
 
       console.log(response)
+
+      dispatch(changeDetails({
+        username: response.data.username,
+        fullName: response.data.fullName,
+        email: response.data.email,
+      }))
     }
 
 

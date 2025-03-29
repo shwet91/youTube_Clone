@@ -1,6 +1,4 @@
-
-import { Calendar, Home, Inbox, Search, Settings, UserCircle , TwitterIcon , History } from "lucide-react"
-import YourTubeLogo from "../DesignSection/Logo"
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -21,23 +19,23 @@ const items = [
     icon: Home,
   },
   {
-    title: "Profile",
+    title: "Inbox",
     url: "#",
-    icon: UserCircle,
+    icon: Inbox,
   },
   {
-    title: "Tweets",
+    title: "Calendar",
     url: "#",
-    icon: TwitterIcon,
+    icon: Calendar,
   },
   {
-    title: "watch History",
+    title: "Search",
     url: "#",
-    icon: History,
+    icon: Search,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: Settings,
   },
 ]
@@ -45,9 +43,9 @@ const items = [
 export function AppSidebar() {
   return (
     <Sidebar  >
-      <SidebarContent className="bg-gray-800 text-white" >
+      <SidebarContent className = {"bg-slate-900 text-white"}>
         <SidebarGroup>
-          <SidebarGroupLabel> <YourTubeLogo></YourTubeLogo> </SidebarGroupLabel>
+          <SidebarGroupLabel className = {"bg-rose-900 text-white"} >Options</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -55,7 +53,8 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
                       <item.icon />
-                      <span>{item.title}</span>
+                      
+                      <span>{item.title} </span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

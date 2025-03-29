@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, Search, Bell, Upload, User, Mic } from 'lucide-react';
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,9 +21,10 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 text-white sticky top-0 z-10 shadow-md">
+    <header className="bg-gray-900 text-white sticky top-0 z-10 shadow-md w-full ">
       <div className="max-w-screen-xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
+          <SidebarTrigger></SidebarTrigger>
           {/* Left Section - Logo and Menu */}
           <div className="flex items-center">
             <button 

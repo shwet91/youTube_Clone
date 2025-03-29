@@ -1,19 +1,29 @@
 const simpleFetch = async ({ url, data, headers = {}, method = 'GET' }) => {
     try {
-        const defaultHeaders = {
+        
+
+        let defaultHeaders = {
             "Content-Type": 'application/json',
             ...headers
         };
 
+        if (data instanceof FormData) {
+            console.log('This is FormData');
+            defaultHeaders = {
+                ...headers
+            };            
+        }
+
         const fetchOptions = {
             method,
             headers: defaultHeaders ,
-            // credentials: 'include',
+            credentials: 'include', // this is crucial for cookies
         };
 
         // Only add body for methods that can have a body
         if (data && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase())) {
-            fetchOptions.body = JSON.stringify(data);
+            fetchOptions.body = (data instanceof FormData) ? data : JSON.stringify(data); // crutial part form data is never converted to string whilsending to server
+
         }
 
         const response = await fetch(url, fetchOptions);
