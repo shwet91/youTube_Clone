@@ -3,9 +3,17 @@ import { Camera, Settings, Watch } from 'lucide-react'
 
 import { useSelector } from 'react-redux'
 
+import UpdateUserDetails from '@/components/UserSettings/UpdateUserDetails'
+import ChangeAvatar from '@/components/UserSettings/ChangeAvatar'
+import ChangeCoverImage from '@/components/UserSettings/ChangeCoverImage'
+import ChangePassword from '@/components/UserSettings/ChangePassword'
+
 function YouTubeProfile() {
   const [activeTab, setActiveTab] = useState('Videos')
   const [bio] = useState('Content creator | Tech Enthusiast | Sharing my journey')
+
+  const [updateAvatar , setUpdateAvatar] = useState(false)
+  const [updateDetails , setUpdateDetails] = useState(false)
 
   const userData = useSelector((state) => state.auth.userData)
 
@@ -65,7 +73,7 @@ function YouTubeProfile() {
 
       {/* Profile Header */}
       <div className="container mx-auto px-4 -mt-16 sm:-mt-20 relative">
-        <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6">
+        <div className="  flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6">
           {/* Profile Picture */}
           <div className="relative">
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-black overflow-hidden">
@@ -74,34 +82,50 @@ function YouTubeProfile() {
                 alt="Profile" 
                 className="w-full h-full object-cover"
               />
-              <button className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                <Camera className="text-white" size={32} />
-              </button>
+              {/* <button onClick={() => setUpdateCoverImage((prev) => !prev)} className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                <Camera  className="text-white" size={32} />
+              </button> */}
             </div>
           </div>
 
           {/* Profile Info */}
-          <div className="text-center sm:text-left flex-grow">
+          <div className="  text-center sm:text-left flex-grow">
             <h1 className="text-2xl sm:text-3xl font-bold">{userData.fullName}</h1>
-            <p className="text-neutral-400 text-sm">@channelhandle</p>
+            <p className="text-neutral-400 text-sm">@{userData.fullName}</p>
             <div className="text-neutral-300 text-sm mt-2">
               {bio}
             </div>
           </div>
 
           {/* Profile Actions */}
-          <div className="flex space-x-4">
-            <button className="bg-neutral-800 hover:bg-neutral-700 px-4 py-2 rounded-full transition-colors">
+          {/* {
+              updateAvatar ?  <div className='bg-red-800 w-full' > </div>  : null
+            } */}
+          <div className="  flex space-x-4">
+            <button onClick={() => setUpdateAvatar((prev) => !prev)}  className="bg-neutral-800 hover:bg-neutral-700 px-4 py-2 rounded-full transition-colors">
               Customize Avatar
             </button>
-            <button className="bg-neutral-800 hover:bg-neutral-700 p-2 rounded-full transition-colors">
-              <Settings size={20} />
+
+            <button onClick={() => setUpdateDetails((prev) => !prev)} size={20}  className="bg-neutral-800 hover:bg-neutral-700 p-2 rounded-full transition-colors">
+              <Settings />
             </button>
           </div>
         </div>
 
+        <div className=' m-auto w-1/2' >
+        {/* <UpdateUserDetails></UpdateUserDetails> */}
+        {/* <ChangeAvatar></ChangeAvatar> */}
+        {/* <ChangeCoverImage></ChangeCoverImage> */}
+        {
+          updateAvatar ?  <div><ChangeAvatar></ChangeAvatar> <ChangeCoverImage></ChangeCoverImage> </div> : null 
+        }
+        {
+          updateDetails ? <div><UpdateUserDetails></UpdateUserDetails> <ChangePassword></ChangePassword></div> : null
+        }
+        </div>
+
         {/* Stats */}
-        <div className="mt-6 flex justify-center sm:justify-start space-x-6 text-neutral-400">
+        <div className="  mt-6 flex justify-center sm:justify-start space-x-6 text-neutral-400">
           <div className="text-center">
             <p className="text-white font-bold text-lg">242</p>
             <p className="text-sm">Subscribers</p>
@@ -117,7 +141,7 @@ function YouTubeProfile() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="mt-8 border-b border-neutral-800">
+        <div className=" border mt-8 -b border-neutral-800">
           <nav className="flex space-x-6 justify-center sm:justify-start">
             {['Videos', 'Playlists', 'Watch History', 'About'].map((tab) => (
               <button 

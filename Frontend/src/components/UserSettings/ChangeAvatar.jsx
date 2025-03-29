@@ -19,6 +19,9 @@ import api from '@/backend/api'
 import { simpleFetch } from '@/backend/simpleFetch'
 import { changeAvatar } from '@/store/authSlice'
 import { useDispatch } from 'react-redux'
+
+import { toast } from "sonner"
+
  
 const formSchema = z.object({   
 })
@@ -51,6 +54,8 @@ function ChangeAvatar() {
           avatar : response.data.avatar
         }))
 
+        toast("Avatar has been changed")
+
         console.log("this is the response :" , response)
       }
   return (
@@ -62,7 +67,7 @@ function ChangeAvatar() {
           control={form.control}
           name="avatar"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-1/2 inline-block m-6" >
               <FormLabel>Avatar</FormLabel>
               <FormControl>
                 <Input placeholder="shadcn" type="file" 

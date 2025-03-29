@@ -18,6 +18,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
+import { toast } from "sonner"
+
+
 
  
 const formSchema = z.object({
@@ -38,8 +41,7 @@ function ChangePassword() {
 
       // 2. Define a submit handler.
    async function onSubmit(values) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+
     console.log(values)
 
     const response = await simpleFetch({
@@ -47,6 +49,8 @@ function ChangePassword() {
       url : api.changeCurrentPassword,
       method : "POST"
     })
+    
+    toast("Password has been changed.")
 
     console.log("this is the response :" , response)
   }
@@ -63,10 +67,10 @@ function ChangePassword() {
           control={form.control}
           name="oldPassword"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-1/3 inline-block m-6" >
               <FormLabel>Old Password</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="Old Password" {...field} />
               </FormControl>
               <FormDescription>
 
@@ -81,10 +85,10 @@ function ChangePassword() {
           control={form.control}
           name="newPassword"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-1/3 inline-block m-6" >
               <FormLabel>New Password</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="New Password" {...field} />
               </FormControl>
               <FormDescription>
 
@@ -94,7 +98,7 @@ function ChangePassword() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Change Password</Button>
       </form>
     </Form>
 

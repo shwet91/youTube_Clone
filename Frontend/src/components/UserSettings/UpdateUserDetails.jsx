@@ -19,6 +19,9 @@ import {
 import { Input } from "@/components/ui/input"
 import { changeDetails } from '@/store/authSlice'
 import { useDispatch } from 'react-redux'
+
+import { toast } from "sonner"
+
  
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -59,22 +62,25 @@ function UpdateUserDetails() {
         fullName: response.data.fullName,
         email: response.data.email,
       }))
+      toast("User details has been changed.")
+
     }
 
 
   return (
-    <div className='border-2 w-1/3 p-4'>
+    <div className='  p-4  '>
 
-<Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+<Form  {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8  ">
         <FormField
           control={form.control}
           name="fullName"
+          
           render={({ field }) => (
-            <FormItem>
+            <FormItem className=" w-1/3 inline-block m-6 " >
               <FormLabel>fullname</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="shadcn" {...field} className="" />
               </FormControl>
               <FormDescription>
                
@@ -88,10 +94,10 @@ function UpdateUserDetails() {
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className=" w-1/3 inline-block  m-6 " >
               <FormLabel>username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="shadcn" {...field} className="" />
               </FormControl>
               <FormDescription>
                
@@ -106,10 +112,10 @@ function UpdateUserDetails() {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className=" w-1/3 inline-block m-6 " >
               <FormLabel>email</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="shadcn" {...field} className="" />
               </FormControl>
               <FormDescription>
                

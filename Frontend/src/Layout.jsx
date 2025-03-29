@@ -1,9 +1,9 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/DesignSection/Sidebar"
 import App from "./App"
-import Header from './components/DesignSection/Header'
 
-import { Outlet } from "react-router-dom"
+import { Toaster } from "@/components/ui/sonner"
+
 
 export default function Layout() {
   return (
@@ -12,9 +12,10 @@ export default function Layout() {
       <App>
         <main>
             {/* <Outlet /> Remove the space between the tags */}
-          </main>
+        </main>
         
       </App>
+      <Toaster />
     </SidebarProvider>
   )
 }

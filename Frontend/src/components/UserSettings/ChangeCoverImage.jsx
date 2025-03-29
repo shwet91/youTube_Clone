@@ -19,6 +19,9 @@ import api from '@/backend/api'
 import { simpleFetch } from '@/backend/simpleFetch'
 import { changeCoverImage } from '@/store/authSlice'
 import { useDispatch } from 'react-redux'
+
+import { toast } from "sonner"
+
  
 const formSchema = z.object({   
 })
@@ -51,6 +54,8 @@ function ChangeCoverImage() {
           coverImage : response.data.coverImage
         }))
 
+        toast("Cover Image has been changed.")
+
         console.log("this is the response :" , response.data.coverImage)
       }
   return (
@@ -62,7 +67,7 @@ function ChangeCoverImage() {
           control={form.control}
           name="coverImage"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-1/2 inline-block m-6" >
               <FormLabel>Cover Image</FormLabel>
               <FormControl>
                 <Input placeholder="shadcn" type="file" 
