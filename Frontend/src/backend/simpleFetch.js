@@ -1,4 +1,4 @@
-import { toast } from "sonner"
+
 
 
 
@@ -44,7 +44,6 @@ const simpleFetch = async ({ url, data, headers = {}, method = 'GET' }) => {
 
     } catch (error) {
         console.error('Fetch error oops:', error.message);
-        toast(`Some error occured :${error.message}`)
         throw error;
 
 

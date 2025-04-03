@@ -8,6 +8,7 @@ import ChangeAvatar from '@/components/UserSettings/ChangeAvatar'
 import ChangeCoverImage from '@/components/UserSettings/ChangeCoverImage'
 import ChangePassword from '@/components/UserSettings/ChangePassword'
 import ChannelVideos from '@/components/VideoSection/ChannelVideos'
+import { useNavigate } from 'react-router-dom'
 
 // fetching
 import { simpleFetch } from '@/backend/simpleFetch'
@@ -23,9 +24,14 @@ function YouTubeProfile() {
   const [videoData , setVideoData] = useState([])
 
   const userData = useSelector((state) => state.auth.userData)
+   const navigate = useNavigate()
+    const isLoggedIn = useSelector((state) => state.auth.status)
 
   // fetching stats
     useEffect(() => {
+      if(!isLoggedIn){
+        navigate("/login")
+      }
       const fetchData = async() => {
         const response = await simpleFetch({
           url : `${api.ChannelStats}/${userData._id}`,
@@ -61,22 +67,9 @@ function YouTubeProfile() {
     switch(activeTab) {
       case 'Watch History':
         return (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="bg-neutral-900 rounded-lg overflow-hidden">
-                <img 
-                  src={`/api/placeholder/300/200?${item}`} 
-                  alt={`Watched Video ${item}`} 
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-2">
-                  <p className="text-sm truncate">Video Title Goes Here</p>
-                  <p className="text-xs text-neutral-400">Channel Name</p>
-                  <p className="text-xs text-neutral-500 mt-1">Watched 2 days ago</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <div className="mt-6 space-y-4 text-neutral-300">
+
+       </div>
         )
       case 'Subscribed Channels':
         return (
@@ -193,7 +186,29 @@ function YouTubeProfile() {
         {/* Navigation Tabs */}
         <div className=" border mt-8 -b border-neutral-800">
           <nav className="flex space-x-6 justify-center sm:justify-start">
-            {['Videos', 'Playlists', 'Watch History', 'Subscribed Channels'].map((tab) => (
+            {/* {['Videos', 'Playlists', 'Watch History', 'Subscribed Channels'].map((tab) => (
+              <button 
+                key={tab} 
+                onClick={() => setActiveTab(tab)}
+                className={`
+                  text-neutral-400 hover:text-white pb-3 
+                  ${activeTab === tab 
+                    ? 'border-b-2 border-white text-white' 
+                    : 'border-b-2 border-transparent'}
+                  transition-colors
+                `}
+              >
+                {tab === 'Watch History' ? (
+                  <span className="flex items-center">
+                    <Watch size={16} className="mr-2" /> Watch History
+                  </span>
+                ) : (
+                  tab
+                )}
+              </button>
+            ))} */}
+
+             {['Videos'].map((tab) => (
               <button 
                 key={tab} 
                 onClick={() => setActiveTab(tab)}

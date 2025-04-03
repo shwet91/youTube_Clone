@@ -59,7 +59,8 @@ function LoginForm() {
             accessToken : response.data.accessToken,
             refreshToken : response.data.refreshToken
           }));
-
+          
+          navigate("/")
         } catch (error) {
           console.error('Login failed', error);
         }

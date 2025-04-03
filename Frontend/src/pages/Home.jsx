@@ -43,44 +43,6 @@ const fetchVideos = async () => {
 };
 
 
-// const fetchVideos = async () => {
-//     if (loading) return; // Prevent duplicate requests
-//     setLoading(true);
-  
-//     try {
-//       const response = await simpleFetch({
-//         url: api.videoRecomendations,
-//         method: 'GET',
-//       });
-    
-//       // Create an array of promises for fetching user data
-//       const videosWithUserData = await Promise.all(
-//         response.data.map(async (video) => {
-//           const userResponse = await simpleFetch({
-//             url: `${api.getAnyUser}/${video.owner}`,
-//             method: "GET"
-//           });
-          
-//           // Return a new object with all original properties plus the new ones
-//           return {
-//             ...video,
-//             avatar: userResponse.data.avatar,
-//             channelName: userResponse.data.fullName
-//           };
-//         })
-//       );
-    
-//       setVideos((prevVideos) => [...prevVideos, ...videosWithUserData]);
-//       console.log('Fetched Videos:', videosWithUserData);
-//     } catch (error) {
-//       console.error('Error fetching videos:', error);
-//     } finally {
-//       setLoading(false);
-//     }
-//    };
-
-
-
 useEffect(() => {
 
   fetchVideos()
@@ -104,19 +66,12 @@ useEffect(() => {
 }, [hasLoggedForCurrentBottom]);
 
  
-const click = () => {
-  console.log("clicked :" , videos)
-}
 
 
   return (
     <div className='w-full h-full bg-slate-900 '>
-      <h1 className='text-white text-center text-8xl' >This is Home</h1>
-
-      <button onClick={click} >Click me</button>
-
-
-<div className="flex flex-wrap justify-around">
+      
+    <div className="flex flex-wrap justify-between gap-4 ">
 
 
       {
@@ -134,7 +89,7 @@ const click = () => {
 
         })
       }
-</div>
+  </div>
 
 
 

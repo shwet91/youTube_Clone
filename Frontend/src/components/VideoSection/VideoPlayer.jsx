@@ -43,9 +43,9 @@ useEffect(() => {
 } , [videoId])
 
 
-  const onClick = () => {
-    console.log(videoData)
-  }
+  // const onClick = () => {
+  //   console.log(videoData)
+  // }
 
   // Toggle Play/Pause
   const togglePlay = () => {
@@ -147,12 +147,12 @@ useEffect(() => {
       className="relative bg-black rounded-lg overflow-hidden" 
       style={{ width, height }}
     >
-      <button className='bg-white' onClick={onClick}>Click me</button>
+      {/* <button className='bg-white' onClick={onClick}>Click me</button> */}
       {/* Video Element */}
       <video
         ref={videoRef}
         src={videoData.videoFile}
-        className="w-full h-full bg-orange-400"
+        className="w-full h-full "
         onTimeUpdate={handleTimeUpdate}
         onClick={togglePlay}
         

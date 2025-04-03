@@ -6,6 +6,7 @@ import { simpleFetch } from '@/backend/simpleFetch'
 import VideoCard from '@/components/Card'
 import ChannelVideos from '@/components/VideoSection/ChannelVideos'
 import Logout from '@/components/Auth/Logout'
+import { useNavigate } from 'react-router-dom'
 
 
 function Test() {
@@ -14,7 +15,8 @@ function Test() {
    const [videos, setVideos] = useState([]);
    const [loading, setLoading] = useState(false);
    const [hasLoggedForCurrentBottom, setHasLoggedForCurrentBottom] = useState(false);
-
+ const navigate = useNavigate()
+ const isLoggedIn = useSelector((state) => state.auth.status)
 
     // useEffect(() => {
     //   const fetchData = async() => {
@@ -45,6 +47,7 @@ function Test() {
     // })
 
     const fetchVideos = async () => {
+
       if (loading) return; // Prevent duplicate requests
       setLoading(true);
       console.log("started")
@@ -65,11 +68,16 @@ function Test() {
     };
 
     useEffect(() => {
+
+      if(!isLoggedIn){
+        navigate("/login")
+      }
     
       const handleScroll = () => {
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight;
         const clientHeight = document.documentElement.clientHeight;
+
         
         if (scrollTop + clientHeight >= scrollHeight - 10) {
           if (!hasLoggedForCurrentBottom) {
@@ -87,8 +95,6 @@ function Test() {
 
 
 
-  
-    
   return (
     <div className='text-white ' >
         <h1>This is test</h1>
@@ -125,6 +131,7 @@ function Test() {
       </div>
     </div>
   )
-}
+  }
+
 
 export default Test

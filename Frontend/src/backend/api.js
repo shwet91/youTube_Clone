@@ -32,6 +32,7 @@ export default {
     getVideoById : `${server}/videos`, // send videoId by params // delete on delete
     increaseViedoViews : `${server}/videos/increaseViews` , // send videoId by params POST
     updateVideo : `${server}/videos/updateVideo`, // send videoId by params , PATCH method
+    searchVideo : `${server}/videos/searchResult`, // send data in body GET
    
 
     // subscription

@@ -4,7 +4,7 @@ import { Button } from './ui/button'
 
 function Store() {
 
-    const data = useSelector((state) => state.auth.userData)
+    const data = useSelector((state) => state)
 
 
   return (

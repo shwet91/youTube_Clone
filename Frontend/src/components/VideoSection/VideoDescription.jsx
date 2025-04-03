@@ -22,6 +22,7 @@ function VideoChannelSection() {
   const [ isLiked , setIsLiked ] = useState(false)
 
       const navigate = useNavigate()
+          const isLoggedIn = useSelector((state) => state.auth.status)
 
   useEffect(() => {
     const fetchOwner = async () => {
@@ -91,30 +92,47 @@ function VideoChannelSection() {
   }
 
   const toggleSubscribe = async () => {
-    console.log("toggleSubscribe")
+    if(!isLoggedIn){
+      return   toast(`Login to Like`)
+    }
 
     const toggleSubscription = await simpleFetch({
       url : `${api.toggleSubscription}/${owner._id}`,
       method : "POST"
     })
+    
 
     console.log(toggleSubscription)
     setIsSubscribed((prev) => !prev)
+    if(!isSubscribed){
+      toast(`Subscribed`)
+    }else{
+      toast(`unsubscribed`)
+    }
   }
 
   const toggleLike = async() => {
+    if(!isLoggedIn){
+      return   toast(`Login to Like`)
+    }
       await simpleFetch({
       url : `${api.toggleLike}/${videoId}`,
       method : "POST"
     })
 
     setIsLiked((prev) => !prev)
+    if(!isLiked){
+      toast(`Liked`)
+    }else{
+      toast(`Unliked`)
+    }
   }
 
 
   return (
     <div className='w-full bg-slate-800'>
-      <button className='bg-white' onClick={() => console.log(userData._id , owner._id )} >Click me</button>
+      {/* <button onClick={() => console.log(videoData)} >"click</button> */}
+      <h1 className='text-center text-white text-4xl p-2' >{videoData.title}</h1>
       <div className='p-4 sm:p-5'>
         <div className='flex flex-col sm:flex-row relative w-full items-center justify-between gap-4'>
           {/* Channel section */}
