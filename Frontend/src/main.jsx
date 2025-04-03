@@ -11,6 +11,8 @@ import VideoPlay from './pages/VideoPlay'
 import YouTubeProfile from './pages/Profile'
 import PublishVideo from './pages/PublishVideo'
 import Test from './pages/Test'
+import EditVideoPage from './pages/EditVideoPage'
+import UploadVideo from './pages/Test2'
 
 import { persistor} from "./store/store"
 import { PersistGate } from 'redux-persist/integration/react'
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
       {
         path: "/uploadVideo",
         element: <PublishVideo></PublishVideo>
+      },
+      {
+        path: "/editVideo/:videoId",
+        element: <EditVideoPage></EditVideoPage>
+      },
+      {
+        path: "/test2/:videoId",
+        element: <UploadVideo></UploadVideo>
       }
     ]
   },

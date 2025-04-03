@@ -1,7 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize2, Minimize } from 'lucide-react';
+import { useParams } from 'react-router-dom';
+import { simpleFetch } from '@/backend/simpleFetch';
+import api from '@/backend/api';
 
-const VideoPlayer = ({ videoId, width = '100%', height = '500px' }) => {
+const VideoPlayer = ({ width = '100%', height = '500px' }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(100);
@@ -9,6 +12,40 @@ const VideoPlayer = ({ videoId, width = '100%', height = '500px' }) => {
   const [progress, setProgress] = useState(0);
   const videoRef = useRef(null);
   const progressRef = useRef(null);
+  const [ videoData , setVideoData] = useState({})
+
+  const {videoId} = useParams()
+
+  // const fetchVideo = async() => {
+
+  //   const response = await simpleFetch({
+  //     url : `${api.getVideoById}/${videoId}`,
+  //     method : "GET"
+  //   })
+  //    setVideoData(response.data)
+
+  //   console.log(videoData)
+
+  // }
+
+useEffect(() => {
+  
+  const fetchVideo = async() => {
+
+    const response = await simpleFetch({
+      url : `${api.getVideoById}/${videoId}`,
+      method : "GET"
+    })
+    setVideoData(response.data)
+  }
+
+  fetchVideo()
+} , [videoId])
+
+
+  const onClick = () => {
+    console.log(videoData)
+  }
 
   // Toggle Play/Pause
   const togglePlay = () => {
@@ -110,10 +147,11 @@ const VideoPlayer = ({ videoId, width = '100%', height = '500px' }) => {
       className="relative bg-black rounded-lg overflow-hidden" 
       style={{ width, height }}
     >
+      <button className='bg-white' onClick={onClick}>Click me</button>
       {/* Video Element */}
       <video
         ref={videoRef}
-        // src={`https://www.youtube.com/embed/${videoId}`}
+        src={videoData.videoFile}
         className="w-full h-full bg-orange-400"
         onTimeUpdate={handleTimeUpdate}
         onClick={togglePlay}

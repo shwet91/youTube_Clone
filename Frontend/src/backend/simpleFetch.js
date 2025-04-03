@@ -5,7 +5,6 @@ import { toast } from "sonner"
 const simpleFetch = async ({ url, data, headers = {}, method = 'GET' }) => {
     try {
         
-
         let defaultHeaders = {
             "Content-Type": 'application/json',
             ...headers

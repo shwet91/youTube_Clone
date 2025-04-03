@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Camera, Settings, Watch } from 'lucide-react'
 
 import { useSelector } from 'react-redux'
@@ -7,15 +7,55 @@ import UpdateUserDetails from '@/components/UserSettings/UpdateUserDetails'
 import ChangeAvatar from '@/components/UserSettings/ChangeAvatar'
 import ChangeCoverImage from '@/components/UserSettings/ChangeCoverImage'
 import ChangePassword from '@/components/UserSettings/ChangePassword'
+import ChannelVideos from '@/components/VideoSection/ChannelVideos'
+
+// fetching
+import { simpleFetch } from '@/backend/simpleFetch'
+import api from '@/backend/api'
 
 function YouTubeProfile() {
   const [activeTab, setActiveTab] = useState('Videos')
   const [bio] = useState('Content creator | Tech Enthusiast | Sharing my journey')
+  const [stats , setStats] = useState({})
 
   const [updateAvatar , setUpdateAvatar] = useState(false)
   const [updateDetails , setUpdateDetails] = useState(false)
+  const [videoData , setVideoData] = useState([])
 
   const userData = useSelector((state) => state.auth.userData)
+
+  // fetching stats
+    useEffect(() => {
+      const fetchData = async() => {
+        const response = await simpleFetch({
+          url : `${api.ChannelStats}/${userData._id}`,
+          method : "GET"
+        })
+
+        console.log(response)
+        setStats(response.data)
+      }
+
+      fetchData()
+
+    } , [userData])
+
+    // fetching channel videos 
+        useEffect(() => {
+          const fetchData = async() => {
+            const response = await simpleFetch({
+              url : `${api.channelVideos}/${userData._id}`,
+              method : "GET"
+            })
+    
+            console.log(response)
+             setVideoData(response.data)
+          }
+    
+          fetchData()
+    
+        } , [userData])
+
 
   const renderTabContent = () => {
     switch(activeTab) {
@@ -38,7 +78,7 @@ function YouTubeProfile() {
             ))}
           </div>
         )
-      case 'About':
+      case 'Subscribed Channels':
         return (
           <div className="mt-6 space-y-4 text-neutral-300">
             <div>
@@ -52,6 +92,12 @@ function YouTubeProfile() {
             </div>
           </div>
         )
+        case 'Videos':
+          return (
+            <div className="mt-6 space-y-4 text-neutral-300">
+               <ChannelVideos videoData = {videoData} channelAvatar={userData.avatar} channelName={userData.fullName} ></ChannelVideos>
+            </div>
+          )
       default:
         return <div className="mt-6 text-neutral-400">No content for this tab</div>
     }
@@ -127,23 +173,27 @@ function YouTubeProfile() {
         {/* Stats */}
         <div className="  mt-6 flex justify-center sm:justify-start space-x-6 text-neutral-400">
           <div className="text-center">
-            <p className="text-white font-bold text-lg">242</p>
+            <p className="text-white font-bold text-lg">{stats.totalSubscribers}</p>
             <p className="text-sm">Subscribers</p>
           </div>
           <div className="text-center">
-            <p className="text-white font-bold text-lg">1,542</p>
+            <p className="text-white font-bold text-lg">{stats.totalViews}</p>
             <p className="text-sm">Total Views</p>
           </div>
           <div className="text-center">
-            <p className="text-white font-bold text-lg">52</p>
+            <p className="text-white font-bold text-lg">{stats.totalVideos}</p>
             <p className="text-sm">Videos</p>
+          </div>
+          <div className="text-center">
+            <p className="text-white font-bold text-lg">{stats.totalLikes}</p>
+            <p className="text-sm">Total Likes</p>
           </div>
         </div>
 
         {/* Navigation Tabs */}
         <div className=" border mt-8 -b border-neutral-800">
           <nav className="flex space-x-6 justify-center sm:justify-start">
-            {['Videos', 'Playlists', 'Watch History', 'About'].map((tab) => (
+            {['Videos', 'Playlists', 'Watch History', 'Subscribed Channels'].map((tab) => (
               <button 
                 key={tab} 
                 onClick={() => setActiveTab(tab)}
@@ -168,7 +218,7 @@ function YouTubeProfile() {
         </div>
 
         {/* Tab Content */}
-        <div>
+        <div className=''>
           {renderTabContent()}
         </div>
       </div>

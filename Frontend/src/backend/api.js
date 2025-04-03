@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react"
+
 
 const server = "http://localhost:8000/api/v1"
 
@@ -14,6 +14,7 @@ export default {
     updateUserAvatar: `${server}/users/updateUserAvatar`,
     updateUserCoverImage: `${server}/users/updateUserCoverImage`,
     getUserProfile:`${server}/users/getUserChannelProfile`,
+    getAnyUser : `${server}/users/getAnyUser`,// send user Id as params
 
     // Comment Api
 
@@ -24,6 +25,17 @@ export default {
 
     // video apis
 
-    publishVideo : `${server}/videos/` // POST for public and GET for getAllVideos
+    publishVideo : `${server}/videos/`, // POST for public and GET for getAllVideos
+    ChannelStats :` ${server}/dashboard/stats`,// send user Id params
+    channelVideos : `${server}/dashboard/videos`,// send user Id params
+    videoRecomendations : `${server}/videos/recomendations/12`, // Get request to get recomended vieos
+    getVideoById : `${server}/videos`, // send videoId by params // delete on delete
+    increaseViedoViews : `${server}/videos/increaseViews` , // send videoId by params POST
+    updateVideo : `${server}/videos/updateVideo`, // send videoId by params , PATCH method
+   
+
+    // subscription
+    getUserSubscribers : `${server}/subscription/getUserChannelSubscribers`, // send channelId as params POST
+    toggleSubscription : `${server}/subscription/toggleSubscription` // send channelId as params POST
 
 }
