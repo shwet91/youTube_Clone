@@ -36,6 +36,11 @@ export default {
 
     // subscription
     getUserSubscribers : `${server}/subscription/getUserChannelSubscribers`, // send channelId as params POST
-    toggleSubscription : `${server}/subscription/toggleSubscription` // send channelId as params POST
+    toggleSubscription : `${server}/subscription/toggleSubscription`, // send channelId as params POST
+    
+
+    // Like 
+    checkForLike : `${server}/like/checkForLiked`, // send videoId as params POST
+    toggleLike : `${server}/like/toggleLikeVideo` , // send videoId as params POST
 
 }

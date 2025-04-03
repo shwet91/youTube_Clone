@@ -21,18 +21,8 @@ import { Outlet } from "react-router-dom"
 function App() {
   return (
     <div className="w-screen h-screen bg-black">
-       {/* <Trial></Trial> */}
-       {/* <SignupForm></SignupForm> */}
-       {/* <LoginForm></LoginForm> */}
-       {/* <Logout></Logout> */}
-      {/* <UpdateUserDetails></UpdateUserDetails> */}
-      {/* <ChangePassword></ChangePassword> */}
-      {/* <ChangeAvatar></ChangeAvatar> */}
-      {/* <ChangeCoverImage></ChangeCoverImage> */}
-      {/* <Store></Store> */}
-      {/* <UploadVideo></UploadVideo> */}
+
       <Header></Header>
-      {/* <Login></Login> */}
       <Outlet></Outlet>
 
 

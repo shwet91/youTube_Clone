@@ -14,47 +14,59 @@ import { toast } from "sonner"
 function VideoChannelSection() {
   const [showDescription, setShowDescription] = useState(false)
   const { videoId } = useParams()
-    const [ owner , setOwner] = useState({})
-    const [ ownerStats , setOwnerStats ] = useState({})
-      const [ videoData , setVideoData] = useState({})
-      const userData = useSelector((state) => state.auth.userData)
-      const [ isSubscribed , setIsSubscribed ] = useState(false)
+  const [ owner , setOwner] = useState({})
+  const [ ownerStats , setOwnerStats ] = useState({})
+  const [ videoData , setVideoData] = useState({})
+  const userData = useSelector((state) => state.auth.userData)
+  const [ isSubscribed , setIsSubscribed ] = useState(false)
+  const [ isLiked , setIsLiked ] = useState(false)
 
       const navigate = useNavigate()
 
   useEffect(() => {
     const fetchOwner = async () => {
-
+    // fetch video
        const response = await simpleFetch({
             url : `${api.getVideoById}/${videoId}`,
             method : "GET"
           })
           setVideoData(response.data)
 
+    // fetch video Owner
       const fetchOwner = await simpleFetch({
             url : `${api.getAnyUser}/${response.data.owner}`,
             method : "GET"
           })
           await setOwner(fetchOwner.data)
-      
+
+      // fetch video Owner Channel Stats
       const fetchOwnerStats = await simpleFetch({
             url : `${api.ChannelStats}/${response.data.owner}`,
             method : "GET"
           })
           setOwnerStats(fetchOwnerStats.data)
 
+      // fetch subscribers list of video Owner
           const subscribersList = await simpleFetch({
             url : `${api.getUserSubscribers}/${fetchOwner.data._id}`,
             method : "POST"
           })
-         console.log(subscribersList.data)
-         subscribersList.data.map((e) => {
+        
+      // check if user exist in video owner subscribers list   
+         Array.from(subscribersList.data).map((e) => {
           if(e.subscriber === userData._id){
             setIsSubscribed(true)
           }else {
             setIsSubscribed(false)
           }
          })
+
+       // check if user has already liked the video or not
+       const checkForLike = await simpleFetch({
+        url : `${api.checkForLike}/${videoId}`,
+        method : "POST"
+       })
+       setIsLiked(checkForLike.data.result)
 
     }
 
@@ -91,7 +103,12 @@ function VideoChannelSection() {
   }
 
   const toggleLike = async() => {
-    console.log("liked")
+      await simpleFetch({
+      url : `${api.toggleLike}/${videoId}`,
+      method : "POST"
+    })
+
+    setIsLiked((prev) => !prev)
   }
 
 
@@ -136,7 +153,7 @@ function VideoChannelSection() {
                 { isSubscribed ? "unsubscribe" : "subscribe"}
               </button>
               <button onClick={toggleLike} className="bg-rose-800 text-white text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 rounded hover:bg-rose-700 transition-colors">
-                Like
+                { isLiked ? "unLike" : "Like"}
               </button>
             </div> : 
               
