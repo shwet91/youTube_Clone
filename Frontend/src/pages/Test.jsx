@@ -7,6 +7,7 @@ import VideoCard from '@/components/Card'
 import ChannelVideos from '@/components/VideoSection/ChannelVideos'
 import Logout from '@/components/Auth/Logout'
 import { useNavigate } from 'react-router-dom'
+import UserCard from '@/components/UserCard'
 
 
 function Test() {
@@ -111,23 +112,7 @@ function Test() {
       </div>
 
       <div>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
-      <VideoCard></VideoCard>
+      <UserCard></UserCard>
       </div>
     </div>
   )

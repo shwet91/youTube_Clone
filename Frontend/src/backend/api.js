@@ -14,7 +14,7 @@ export default {
     updateUserAvatar: `${server}/users/updateUserAvatar`,
     updateUserCoverImage: `${server}/users/updateUserCoverImage`,
     getUserProfile:`${server}/users/getUserChannelProfile`,
-    getAnyUser : `${server}/users/getAnyUser`,// send user Id as params
+    getAnyUser : `${server}/users/getAnyUser`,// send user Id as params "GET"
 
     // Comment Api
 
@@ -29,10 +29,11 @@ export default {
     ChannelStats :` ${server}/dashboard/stats`,// send user Id params
     channelVideos : `${server}/dashboard/videos`,// send user Id params
     videoRecomendations : `${server}/videos/recomendations/12`, // Get request to get recomended vieos
-    getVideoById : `${server}/videos`, // send videoId by params // delete on delete
+    getVideoById : `${server}/videos`, // send videoId by params GET // delete on delete
     increaseViedoViews : `${server}/videos/increaseViews` , // send videoId by params POST
     updateVideo : `${server}/videos/updateVideo`, // send videoId by params , PATCH method
     searchVideo : `${server}/videos/searchResult`, // send data in body GET
+    getWatchHistory : `${server}/videos/getWatchHistory`, //POST , userId as params
    
 
     // subscription

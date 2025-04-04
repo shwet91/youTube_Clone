@@ -81,5 +81,5 @@ createRoot(document.getElementById('root')).render(
 
     </Provider>
 
-  </StrictMode>,
+   </StrictMode>,
 )
